@@ -60,17 +60,25 @@ keyLeft = keyboard_check(vk_left);
 keyRight = keyboard_check(vk_right);
 keyJump = keyboard_check(vk_up);
 
+//cancelar input
+if(hit &gt; 0){
+    keyLeft = 0;
+    keyRight = 0;
+}
+
 //Gravedad
 if (vSpeed &lt; 10)
     vSpeed += grav;
 
 //Movimiento
 move = keyRight - keyLeft;
+
+//si no ha sido golpeado -&gt; se mueve
 if(hit == 0){
     hSpeed = move * movSpeed;
 }
 
-//Hit
+//Hit -&gt; resetea el contador de golpeo
 if(hit &gt; 0){
     hit -= (1/room_speed);
 }
@@ -105,7 +113,7 @@ if (place_meeting(x, y + vSpeed, objBlock))
 if(place_meeting(x + hSpeed, y, objEnemyTest) &amp;&amp; hit == 0){
     hSpeed = -sign(hSpeed)*4;
     vSpeed = -4;
-    hit = 0.3;
+    hit = 0.4;
     //hSpeed = 0;
 }
 

@@ -31,6 +31,7 @@ hSpeed = 0;
 movSpeed = 2;
 move = random(2)+0.5;
 global.enemyCount += 1;
+alive = true;
 </string>
           </argument>
         </arguments>
@@ -76,34 +77,52 @@ global.enemyCount += 1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>hSpeed = move * movSpeed;
+            <string>//indica al jugador que fue golpeado
+with(objPlayer){
+    other.playerHit = hit;
+}
 
+//si esta vivo y el jugador no ha sido golpeado, avanza hacia el
+if(alive &amp;&amp; playerHit == 0){
+    hSpeed = move * movSpeed;
+}
+
+//gravedad
 if (vSpeed &lt; 10)
     vSpeed += grav;
 
-if (place_meeting(x + hSpeed, y, objBlock))
-{
-    while !(place_meeting(x + sign(hSpeed), y, objBlock))
+//si esta vivo -&gt; colisiones
+if(alive){
+    if (place_meeting(x + hSpeed, y, objBlock))
     {
-        x += sign(hSpeed);
+        while !(place_meeting(x + sign(hSpeed), y, objBlock))
+        {
+            x += sign(hSpeed);
+        }
+        hSpeed = 0;
     }
-    hSpeed = 0;
+
+    if (place_meeting(x, y + vSpeed, objBlock))
+    {
+        while !(place_meeting(x, y + sign(vSpeed), objBlock))
+        {
+            y += sign(vSpeed);
+        }
+        vSpeed = 0;
+    }
 }
 
-if (place_meeting(x, y + vSpeed, objBlock))
-{
-    while !(place_meeting(x, y + sign(vSpeed), objBlock))
-    {
-        y += sign(vSpeed);
-    }
-    vSpeed = 0;
-}
-
-
+//si esta al lado del jugador, se detiene
 if(place_meeting(x + hSpeed*2, y, objPlayer)){
     hSpeed = 0;
 }
 
+//si cae bajo la altura de la room, se destruye
+if(y&gt;room_height){
+    instance_destroy();
+}
+
+//aplica velocidades
 x += hSpeed;
 y += vSpeed;
 </string>
@@ -128,7 +147,10 @@ y += vSpeed;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>instance_destroy();
+            <string>//animacion de muerte del enemigo
+alive = false;
+hSpeed = -sign(move)*3;
+vSpeed = -3;
 </string>
           </argument>
         </arguments>

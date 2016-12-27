@@ -10,6 +10,10 @@
   <sprites name="sprites">
     <sprite>sprites\sprPlayerTest</sprite>
     <sprite>sprites\sprBlockTest</sprite>
+    <sprite>sprites\sprMordIdle</sprite>
+    <sprite>sprites\sprMordKick</sprite>
+    <sprite>sprites\sprKickHbox</sprite>
+    <sprite>sprites\sprEnemyTest</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bgTest</background>
@@ -25,8 +29,12 @@
     <object>objects\objPlayer</object>
     <object>objects\GC</object>
     <object>objects\objBlock</object>
+    <object>objects\objKickHbox</object>
+    <object>objects\objEnemyTest</object>
+    <object>objects\objEnemySpawn</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\rmTestNico</room>
     <room>rooms\rmTest</room>
   </rooms>
   <help>
