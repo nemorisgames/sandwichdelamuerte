@@ -8,12 +8,14 @@
     <sound>sound\sndTest</sound>
   </sounds>
   <sprites name="sprites">
-    <sprite>sprites\sprPlayerTest</sprite>
     <sprite>sprites\sprBlockTest</sprite>
-    <sprite>sprites\sprMordIdle</sprite>
-    <sprite>sprites\sprMordKick</sprite>
+    <sprite>sprites\sprPlayerTest</sprite>
+    <sprite>sprites\sprPlayerKick</sprite>
     <sprite>sprites\sprKickHbox</sprite>
     <sprite>sprites\sprEnemyTest</sprite>
+    <sprite>sprites\sprPlayerPunch</sprite>
+    <sprite>sprites\sprPunchHbox</sprite>
+    <sprite>sprites\sprPlayerDuck</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bgTest</background>
@@ -30,6 +32,7 @@
     <object>objects\GC</object>
     <object>objects\objBlock</object>
     <object>objects\objKickHbox</object>
+    <object>objects\objPunchHbox</object>
     <object>objects\objEnemyTest</object>
     <object>objects\objEnemySpawn</object>
   </objects>
