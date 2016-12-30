@@ -33,9 +33,10 @@ movSpeed = 3.2;
 jumpSpeed = 5;
 dir = 1;
 hit = 0;
-image_speed = 0.2;
+image_speed = 0.1;
 grounded = true;
 airHit = true;
+life = 8;
 </string>
           </argument>
         </arguments>
@@ -128,6 +129,7 @@ if(place_meeting(x + hSpeed, y, objEnemyTest) &amp;&amp; hit == 0){
     enemy = instance_place(x + hSpeed,y,objEnemyTest);
     if(enemy.alive){
         hSpeed = -sign(hSpeed)*4;
+        life -= 1;
         if(grounded){
             vSpeed = -4;
             hit = 0.4

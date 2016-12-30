@@ -9,13 +9,19 @@
   </sounds>
   <sprites name="sprites">
     <sprite>sprites\sprBlockTest</sprite>
-    <sprite>sprites\sprPlayerTest</sprite>
-    <sprite>sprites\sprPlayerKick</sprite>
-    <sprite>sprites\sprKickHbox</sprite>
-    <sprite>sprites\sprEnemyTest</sprite>
-    <sprite>sprites\sprPlayerPunch</sprite>
-    <sprite>sprites\sprPunchHbox</sprite>
-    <sprite>sprites\sprPlayerDuck</sprite>
+    <sprites name="Player">
+      <sprite>sprites\sprPlayerTest</sprite>
+      <sprite>sprites\sprPlayerKick</sprite>
+      <sprite>sprites\sprPlayerPunch</sprite>
+      <sprite>sprites\sprPlayerDuck</sprite>
+      <sprite>sprites\sprKickHbox</sprite>
+      <sprite>sprites\sprPunchHbox</sprite>
+    </sprites>
+    <sprites name="Enemies">
+      <sprite>sprites\sprEnemy2Test</sprite>
+      <sprite>sprites\sprEnemyTest</sprite>
+      <sprite>sprites\sprDistAtk</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\bgTest</background>
@@ -28,15 +34,22 @@
     <font>fonts\fntTest</font>
   </fonts>
   <objects name="objects">
-    <object>objects\objPlayer</object>
     <object>objects\GC</object>
     <object>objects\objBlock</object>
-    <object>objects\objKickHbox</object>
-    <object>objects\objPunchHbox</object>
-    <object>objects\objEnemyTest</object>
+    <object>objects\objEnemyBase</object>
     <object>objects\objEnemySpawn</object>
     <object>objects\objStartMarker</object>
     <object>objects\objEndMarker</object>
+    <objects name="Player">
+      <object>objects\objPlayer</object>
+      <object>objects\objPunchHbox</object>
+      <object>objects\objKickHbox</object>
+    </objects>
+    <objects name="Enemies">
+      <object>objects\objEnemy2Test</object>
+      <object>objects\objEnemyTest</object>
+      <object>objects\objDistAtk</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rmTestNico</room>

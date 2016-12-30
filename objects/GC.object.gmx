@@ -40,8 +40,13 @@ for(i = 0;i&lt;instance_number(objEnemySpawn);i+=1){
 cnt = 0;
 time = 0;
 //tasa de spawneo de enemigos
-spawnTime = room_speed*1.2;
+spawnTime = room_speed*1.5;
+type2 = false;
+
+
 debug = true;
+
+
 </string>
           </argument>
         </arguments>
@@ -80,6 +85,21 @@ debug = true;
                 }
             }
         }
+        else if(rndSide &lt; 0.2 &amp;&amp; type2 == false){
+            //Genera de un lado al azar
+            rnd = irandom(array_length_1d(enemySpawn)-1);
+            startMarker = instance_find(objStartMarker,0);
+            endMarker = instance_find(objEndMarker,0);
+            player = instance_find(objPlayer,0);
+            if((enemySpawn[rnd].start &amp;&amp; player.x &lt; startMarker.x) || !enemySpawn[rnd].start &amp;&amp; player.x &gt; endMarker.x){
+                with(enemySpawn[rnd]){
+                    with(instance_create(x,y,objEnemy2Test)){
+                        image_xscale = other.image_xscale;
+                        move *= image_xscale;
+                    }
+                }
+            }
+        }
         else{
             //Genera de un lado al azar
             rnd = irandom(array_length_1d(enemySpawn)-1);
@@ -105,7 +125,7 @@ if(cnt%60==0){
     time += 1;
 }
 
-
+rndOld = rndSide;
 
 
 </string>
@@ -141,6 +161,7 @@ if(debug){
         draw_text(other.x,other.y+24,"Hit: "+string(hit));
         draw_text(other.x,other.y+36,"Grounded: "+string(grounded));
         draw_text(other.x,other.y+48,"Air Hit: "+string(airHit));
+        draw_text(other.x,other.y+60,"Life: "+string(life));
     }
 }
 </string>
