@@ -25,10 +25,11 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>grav = 0.3;
+            <string>//
+grav = 0.3;
 vSpeed = 0;
 hSpeed = 0;
-movSpeed = 3.5;
+movSpeed = 3.2;
 jumpSpeed = 5;
 dir = 1;
 hit = 0;
@@ -103,20 +104,20 @@ if (place_meeting(x, y + 1, objBlock))
 //Colisiones
 if (place_meeting(x + hSpeed, y, objBlock))
 {
-    while !(place_meeting(x + sign(hSpeed), y, objBlock))
+    /*while !(place_meeting(x + sign(hSpeed), y, objBlock))
     {
         x += sign(hSpeed);
-    }
+    }*/
     hSpeed = 0;
 }
 //x += hSpeed;
 
 if (place_meeting(x, y + vSpeed, objBlock))
 {
-    while !(place_meeting(x, y + sign(vSpeed), objBlock))
+    /*while !(place_meeting(x, y + sign(vSpeed), objBlock))
     {
         y += sign(vSpeed);
-    }
+    }*/
     vSpeed = 0;
     grounded = true;
     airHit = true;

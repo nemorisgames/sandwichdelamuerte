@@ -28,8 +28,8 @@
             <string>//contador de enemigos
 global.enemyCount = 0;
 //maximo de enemigos
-enemyMax = 2;
-enemyTotal = 8;
+enemyMax = 4;
+enemyTotal = 100;
 
 //obtiene los dos puntos de spawneo
 for(i = 0;i&lt;instance_number(objEnemySpawn);i+=1){
@@ -38,8 +38,9 @@ for(i = 0;i&lt;instance_number(objEnemySpawn);i+=1){
 
 //contador de frames
 cnt = 0;
+time = 0;
 //tasa de spawneo de enemigos
-time = room_speed*2;
+spawnTime = room_speed*1.2;
 debug = true;
 </string>
           </argument>
@@ -63,20 +64,46 @@ debug = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//suma cada frame
-
-//si se pueden generar mas enemigos, genera uno en el tiempo indicado de spawneo
-//le asigna la misma escala x del punto de spawneo y se la aplica a la velocidad
-if(global.enemyCount &lt; enemyMax &amp;&amp; cnt%time==0){
-    with(enemySpawn[irandom(array_length_1d(enemySpawn)-1)]){
-        with(instance_create(x,y,objEnemyTest)){
-            image_xscale = other.image_xscale;
-            move *= image_xscale;
+            <string>if(enemyTotal &gt; 0){
+    //si se pueden generar mas enemigos, genera uno en el tiempo indicado de spawneo
+    //le asigna la misma escala x del punto de spawneo y se la aplica a la velocidad
+    if(global.enemyCount &lt; enemyMax &amp;&amp; cnt%spawnTime==0){
+        rndSide = random(1);
+        if(rndSide &gt; 0.7 &amp;&amp; enemySpawn[0].move){
+        //Genera de ambos lados
+            for(i = 0;i&lt;array_length_1d(enemySpawn);i+=1){
+                with(enemySpawn[i]){
+                    with(instance_create(x,y,objEnemyTest)){
+                        image_xscale = other.image_xscale;
+                        move *= image_xscale;
+                    }
+                }
+            }
+        }
+        else{
+            //Genera de un lado al azar
+            rnd = irandom(array_length_1d(enemySpawn)-1);
+            startMarker = instance_find(objStartMarker,0);
+            endMarker = instance_find(objEndMarker,0);
+            player = instance_find(objPlayer,0);
+            if((enemySpawn[rnd].start &amp;&amp; player.x &lt; startMarker.x) || !enemySpawn[rnd].start &amp;&amp; player.x &gt; endMarker.x){
+                with(enemySpawn[rnd]){
+                    with(instance_create(x,y,objEnemyTest)){
+                        image_xscale = other.image_xscale;
+                        move *= image_xscale;
+                    }
+                }
+            }
         }
     }
 }
 
+//suma cada frame
 cnt += 1;
+
+if(cnt%60==0){
+    time += 1;
+}
 
 
 
@@ -107,10 +134,13 @@ cnt += 1;
 
 if(debug){
     draw_set_font(fntTest);
+    draw_set_colour(c_white);
     with(objPlayer){
-        draw_text(other.x,other.y,"Hit: "+string(hit));
-        draw_text(other.x,other.y+20,"Grounded: "+string(grounded));
-        draw_text(other.x,other.y+40,"Air Hit: "+string(airHit));
+        draw_text(other.x,other.y,"Time: "+string(other.time));
+        draw_text(other.x,other.y+12,"Enemies left: "+string(other.enemyTotal));
+        draw_text(other.x,other.y+24,"Hit: "+string(hit));
+        draw_text(other.x,other.y+36,"Grounded: "+string(grounded));
+        draw_text(other.x,other.y+48,"Air Hit: "+string(airHit));
     }
 }
 </string>

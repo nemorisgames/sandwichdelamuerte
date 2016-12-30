@@ -25,11 +25,12 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>grav = 0.3;
+            <string>//
 vSpeed = 0;
 hSpeed = 0;
+grav = 0.3;
 movSpeed = 2;
-move = random(2)+0.5;
+move = random(0.8)+1;
 global.enemyCount += 1;
 alive = true;
 </string>
@@ -55,6 +56,9 @@ alive = true;
           <argument>
             <kind>1</kind>
             <string>global.enemyCount -= 1;
+with(GC){
+    enemyTotal -= 1;
+}
 </string>
           </argument>
         </arguments>
@@ -148,9 +152,11 @@ y += vSpeed;
           <argument>
             <kind>1</kind>
             <string>//animacion de muerte del enemigo
-alive = false;
-hSpeed = -sign(move)*3;
-vSpeed = -3;
+if(alive){
+    alive = false;
+    hSpeed = -sign(move)*3;
+    vSpeed = -3;
+}
 </string>
           </argument>
         </arguments>
@@ -174,9 +180,11 @@ vSpeed = -3;
           <argument>
             <kind>1</kind>
             <string>//animacion de muerte del enemigo
-alive = false;
-hSpeed = -sign(move)*3;
-vSpeed = -3;
+if(alive){
+    alive = false;
+    hSpeed = -sign(move)*3;
+    vSpeed = -3;
+}
 </string>
           </argument>
         </arguments>

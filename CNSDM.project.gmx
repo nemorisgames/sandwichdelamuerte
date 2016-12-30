@@ -35,6 +35,8 @@
     <object>objects\objPunchHbox</object>
     <object>objects\objEnemyTest</object>
     <object>objects\objEnemySpawn</object>
+    <object>objects\objStartMarker</object>
+    <object>objects\objEndMarker</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rmTestNico</room>
