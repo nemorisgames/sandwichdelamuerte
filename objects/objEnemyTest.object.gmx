@@ -82,7 +82,7 @@ y += vSpeed;
         </arguments>
       </action>
     </event>
-    <event eventtype="4" ename="objPunchHbox">
+    <event eventtype="4" ename="objKickHbox">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -105,7 +105,7 @@ y += vSpeed;
         </arguments>
       </action>
     </event>
-    <event eventtype="4" ename="objKickHbox">
+    <event eventtype="4" ename="objPunchHbox">
       <action>
         <libid>1</libid>
         <id>603</id>

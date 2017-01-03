@@ -31,7 +31,7 @@ vSpeed = 0;
 hSpeed = 0;
 movSpeed = 3.2;
 jumpSpeed = 5;
-dir = 1;
+dir = -1;
 hit = 0;
 image_speed = 0.1;
 grounded = true;
@@ -89,7 +89,7 @@ if(hit &gt; 0){
 }
 
 //Agacharse
-if(keyDuck){
+if(keyDuck &amp;&amp; sprite_index != sprPlayerLowKick &amp;&amp; sprite_index != sprPlayerLowPunch){
     sprite_index = sprPlayerDuck;
 }
 
@@ -98,6 +98,7 @@ if (place_meeting(x, y + 1, objBlock))
 {
     vSpeed = keyJump * -jumpSpeed;
     if(keyJump != 0){
+        sprite_index = sprPlayerJump;
         grounded = false;
     }
 }
@@ -115,18 +116,17 @@ if (place_meeting(x + hSpeed, y, objBlock))
 
 if (place_meeting(x, y + vSpeed, objBlock))
 {
-    /*while !(place_meeting(x, y + sign(vSpeed), objBlock))
-    {
-        y += sign(vSpeed);
-    }*/
+    if(sprite_index == sprPlayerJump){
+        sprite_index = sprPlayerTest;
+    }
     vSpeed = 0;
     grounded = true;
     airHit = true;
 }
 
 //Knockback
-if(place_meeting(x + hSpeed, y, objEnemyTest) &amp;&amp; hit == 0){
-    enemy = instance_place(x + hSpeed,y,objEnemyTest);
+if(place_meeting(x + hSpeed, y, objEnemyBase) &amp;&amp; hit == 0){
+    enemy = instance_place(x + hSpeed,y,objEnemyBase);
     if(enemy.alive){
         hSpeed = -sign(hSpeed)*4;
         life -= 1;
@@ -172,20 +172,43 @@ if(move != 0 &amp;&amp; move != dir){
     }
 }
 
+if(hSpeed != 0 &amp;&amp; grounded){
+    sprite_index = sprPlayerRun;
+}
+
+if(sprite_index == sprPlayerRun &amp;&amp; hSpeed == 0){
+    sprite_index = sprPlayerTest;
+}
+
+
 //Patada
 if(keyboard_check_pressed(ord('Z'))){
-    sprite_index = sprPlayerKick;
-    
-    with(instance_create(x,y,objKickHbox)){
-        image_xscale = other.image_xscale;
+    if(keyDuck){
+        sprite_index = sprPlayerLowKick;
+        with(instance_create(x,y,objLowKickHbox)){
+            image_xscale = other.image_xscale;
+        }
+    }
+    else{
+        sprite_index = sprPlayerKick;
+        with(instance_create(x,y,objKickHbox)){
+            image_xscale = other.image_xscale;
+        }
     }
 }
 
 if(keyboard_check_pressed(ord('X'))){
-    sprite_index = sprPlayerPunch;
-    
-    with(instance_create(x,y,objPunchHbox)){
-        image_xscale = other.image_xscale;
+    if(keyDuck){
+        sprite_index = sprPlayerLowPunch;
+        with(instance_create(x,y,objLowPunchHbox)){
+            image_xscale = other.image_xscale;
+        }
+    }
+    else{
+        sprite_index = sprPlayerPunch;
+        with(instance_create(x,y,objPunchHbox)){
+            image_xscale = other.image_xscale;
+        }
     }
 }
 
@@ -213,7 +236,7 @@ if(keyboard_check_pressed(ord('X'))){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(sprite_index != sprPlayerTest){
+            <string>if(sprite_index != sprPlayerTest &amp;&amp; sprite_index != sprPlayerRun &amp;&amp; sprite_index != sprPlayerJump){
     sprite_index = sprPlayerTest;
 }
 </string>

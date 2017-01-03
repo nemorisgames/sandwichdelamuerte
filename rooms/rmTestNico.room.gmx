@@ -169,7 +169,7 @@
     <instance objName="objBlock" x="1120" y="352" name="inst_C6010E34" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objBlock" x="1152" y="352" name="inst_CE0896D1" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objBlock" x="1184" y="352" name="inst_7794AA1D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="objPlayer" x="1472" y="247" name="inst_39398039" locked="0" code="" scaleX="-1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="objPlayer" x="1511" y="243" name="inst_39398039" locked="0" code="" scaleX="-1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objBlock" x="1216" y="288" name="inst_5BB24344" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objBlock" x="1216" y="320" name="inst_FD6BE805" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objBlock" x="1216" y="352" name="inst_18736552" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>

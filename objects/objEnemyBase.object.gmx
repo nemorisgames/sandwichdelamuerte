@@ -134,7 +134,35 @@ if(y&gt;room_height){
         </arguments>
       </action>
     </event>
-    <event eventtype="4" ename="objPunchHbox">
+    <event eventtype="4" ename="objLowPunchHbox">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//animacion de muerte del enemigo
+if(alive){
+    alive = false;
+    hSpeed = -sign(move)*3;
+    vSpeed = -3;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="objLowKickHbox">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -163,6 +191,34 @@ if(alive){
       </action>
     </event>
     <event eventtype="4" ename="objKickHbox">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//animacion de muerte del enemigo
+if(alive){
+    alive = false;
+    hSpeed = -sign(move)*3;
+    vSpeed = -3;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="objPunchHbox">
       <action>
         <libid>1</libid>
         <id>603</id>

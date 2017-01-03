@@ -16,6 +16,12 @@
       <sprite>sprites\sprPlayerDuck</sprite>
       <sprite>sprites\sprKickHbox</sprite>
       <sprite>sprites\sprPunchHbox</sprite>
+      <sprite>sprites\sprPlayerRun</sprite>
+      <sprite>sprites\sprPlayerJump</sprite>
+      <sprite>sprites\sprPlayerLowPunch</sprite>
+      <sprite>sprites\sprPlayerLowKick</sprite>
+      <sprite>sprites\sprLowPunchHbox</sprite>
+      <sprite>sprites\sprLowKickHbox</sprite>
     </sprites>
     <sprites name="Enemies">
       <sprite>sprites\sprEnemy2Test</sprite>
@@ -44,6 +50,8 @@
       <object>objects\objPlayer</object>
       <object>objects\objPunchHbox</object>
       <object>objects\objKickHbox</object>
+      <object>objects\objLowKickHbox</object>
+      <object>objects\objLowPunchHbox</object>
     </objects>
     <objects name="Enemies">
       <object>objects\objEnemy2Test</object>
