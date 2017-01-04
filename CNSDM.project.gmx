@@ -11,6 +11,7 @@
     <sprite>sprites\sprBlockTest</sprite>
     <sprites name="Player">
       <sprite>sprites\sprPlayerTest</sprite>
+      <sprite>sprites\sprPlayerHit</sprite>
       <sprite>sprites\sprPlayerKick</sprite>
       <sprite>sprites\sprPlayerPunch</sprite>
       <sprite>sprites\sprPlayerDuck</sprite>
@@ -25,6 +26,8 @@
     </sprites>
     <sprites name="Enemies">
       <sprite>sprites\sprEnemy2Test</sprite>
+      <sprite>sprites\sprBossTest</sprite>
+      <sprite>sprites\sprBossHit</sprite>
       <sprite>sprites\sprEnemyTest</sprite>
       <sprite>sprites\sprDistAtk</sprite>
     </sprites>
@@ -38,13 +41,15 @@
   </scripts>
   <fonts name="fonts">
     <font>fonts\fntTest</font>
+    <font>fonts\fntTestBig</font>
   </fonts>
   <objects name="objects">
     <object>objects\GC</object>
+    <object>objects\GUI</object>
     <object>objects\objBlock</object>
-    <object>objects\objEnemyBase</object>
     <object>objects\objEnemySpawn</object>
     <object>objects\objStartMarker</object>
+    <object>objects\objBossMarker</object>
     <object>objects\objEndMarker</object>
     <objects name="Player">
       <object>objects\objPlayer</object>
@@ -55,8 +60,10 @@
     </objects>
     <objects name="Enemies">
       <object>objects\objEnemy2Test</object>
+      <object>objects\objBossTest</object>
       <object>objects\objEnemyTest</object>
       <object>objects\objDistAtk</object>
+      <object>objects\objEnemyBase</object>
     </objects>
   </objects>
   <rooms name="rooms">
