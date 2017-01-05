@@ -31,7 +31,6 @@
       <sprite>sprites\sprEnemyTest</sprite>
       <sprite>sprites\sprDistAtk</sprite>
     </sprites>
-    <sprite>sprites\sprTestFondo</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bgTest</background>
@@ -67,12 +66,11 @@
       <object>objects\objDistAtk</object>
       <object>objects\objEnemyBase</object>
     </objects>
-    <object>objects\objTestFondo</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rmTestNico</room>
-    <room>rooms\room3</room>
     <room>rooms\rmTest</room>
+    <room>rooms\room3</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
