@@ -28,9 +28,11 @@
       <sprite>sprites\sprEnemyTest</sprite>
       <sprite>sprites\sprDistAtk</sprite>
     </sprites>
+    <sprite>sprites\sprTestFondo</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bgTest</background>
+    <background>background\bckTilesScene1</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -58,9 +60,11 @@
       <object>objects\objEnemyTest</object>
       <object>objects\objDistAtk</object>
     </objects>
+    <object>objects\objTestFondo</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rmTestNico</room>
+    <room>rooms\room3</room>
     <room>rooms\rmTest</room>
   </rooms>
   <help>
