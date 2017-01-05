@@ -54,12 +54,8 @@ player = instance_find(objPlayer,0);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/*cnt += 1;
-if(global.enemyCount &lt; 1 &amp;&amp; cnt%time==0){
-    instance_create(x,y,objEnemyTest);
-}*/
-if(move){
-    x = player.x -(sign(image_xscale))*view_wview[0]/1.5;
+            <string>if(move){
+    x = player.x -(sign(image_xscale))*view_wview[0]/1.9;
 }
 
 if(image_xscale &lt; 0 &amp;&amp; x &gt;= startX){

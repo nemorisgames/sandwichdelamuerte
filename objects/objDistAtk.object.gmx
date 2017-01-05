@@ -77,7 +77,12 @@ if(x &gt; player.x + view_wview[0]/2 || x &lt; player.x - view_wview[0]/2){
           <argument>
             <kind>1</kind>
             <string>with(objPlayer){
-    life -= 1;
+    if(hit == 0){
+        life -= 1;
+        hit = 0.5;
+        hSpeed = other.image_xscale * 2;
+        sprite_index = sprPlayerHit;
+    }
 }
 instance_destroy();
 </string>

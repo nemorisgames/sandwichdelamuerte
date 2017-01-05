@@ -28,7 +28,7 @@
             <string>//contador de enemigos
 global.enemyCount = 0;
 //maximo de enemigos
-enemyMax = 4;
+enemyMax = 6;
 enemyTotal = 100;
 
 //obtiene los dos puntos de spawneo
@@ -40,11 +40,12 @@ for(i = 0;i&lt;instance_number(objEnemySpawn);i+=1){
 cnt = 0;
 time = 0;
 //tasa de spawneo de enemigos
-spawnTime = room_speed*1.5;
+spawnTime = room_speed*1.2;
 type2 = false;
 
 
 debug = true;
+gameOver = false;
 
 
 </string>
@@ -69,12 +70,12 @@ debug = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(enemyTotal &gt; 0){
+            <string>if(enemyTotal &gt; 0 &amp;&amp; !gameOver){
     //si se pueden generar mas enemigos, genera uno en el tiempo indicado de spawneo
     //le asigna la misma escala x del punto de spawneo y se la aplica a la velocidad
     if(global.enemyCount &lt; enemyMax &amp;&amp; cnt%spawnTime==0){
         rndSide = random(1);
-        if(rndSide &gt; 0.7 &amp;&amp; enemySpawn[0].move){
+        if(rndSide &gt; 0.65 &amp;&amp; enemySpawn[0].move){
         //Genera de ambos lados
             for(i = 0;i&lt;array_length_1d(enemySpawn);i+=1){
                 with(enemySpawn[i]){
@@ -85,7 +86,7 @@ debug = true;
                 }
             }
         }
-        else if(rndSide &lt; 0.2 &amp;&amp; type2 == false){
+        else if(rndSide &lt; 0.3 &amp;&amp; type2 == false){
             //Genera de un lado al azar
             rnd = irandom(array_length_1d(enemySpawn)-1);
             startMarker = instance_find(objStartMarker,0);
@@ -127,6 +128,11 @@ if(cnt%60==0){
 
 rndOld = rndSide;
 
+if(player.life &lt;= 0){
+    gameOver = true;
+    player.visible = false;
+}
+
 
 </string>
           </argument>
@@ -150,11 +156,10 @@ rndOld = rndSide;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//draw_self();
-
-if(debug){
+            <string>if(debug){
     draw_set_font(fntTest);
     draw_set_colour(c_white);
+    draw_set_halign(fa_left);
     with(objPlayer){
         draw_text(other.x,other.y,"Time: "+string(other.time));
         draw_text(other.x,other.y+12,"Enemies left: "+string(other.enemyTotal));

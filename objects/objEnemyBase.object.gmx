@@ -32,11 +32,13 @@ grav = 0.3;
 movSpeed = 2;
 global.enemyCount += 1;
 alive = true;
+boss = false;
+image_speed = 0.1;
 
 engaged = false;
 
 playerDistance = 0;
-move = random(0.8)+1;
+move = random(0.8)+0.5;
 </string>
           </argument>
         </arguments>
@@ -154,7 +156,7 @@ if(y&gt;room_height){
             <string>//animacion de muerte del enemigo
 if(alive){
     alive = false;
-    hSpeed = -sign(move)*3;
+    hSpeed = -sign(image_xscale)*3;
     vSpeed = -3;
 }
 </string>
@@ -182,7 +184,7 @@ if(alive){
             <string>//animacion de muerte del enemigo
 if(alive){
     alive = false;
-    hSpeed = -sign(move)*3;
+    hSpeed = -sign(image_xscale)*3;
     vSpeed = -3;
 }
 </string>
@@ -210,7 +212,7 @@ if(alive){
             <string>//animacion de muerte del enemigo
 if(alive){
     alive = false;
-    hSpeed = -sign(move)*3;
+    hSpeed = -sign(image_xscale)*3;
     vSpeed = -3;
 }
 </string>
@@ -238,7 +240,7 @@ if(alive){
             <string>//animacion de muerte del enemigo
 if(alive){
     alive = false;
-    hSpeed = -sign(move)*3;
+    hSpeed = -sign(image_xscale)*3;
     vSpeed = -3;
 }
 </string>

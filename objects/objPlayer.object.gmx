@@ -29,14 +29,17 @@
 grav = 0.3;
 vSpeed = 0;
 hSpeed = 0;
-movSpeed = 3.2;
+movSpeed = 2.5;
+airMovSpeed = 2;
 jumpSpeed = 5;
-dir = -1;
+dir = sign(image_xscale);
+oldDir = dir;
 hit = 0;
-image_speed = 0.1;
+image_speed = 0.15;
 grounded = true;
 airHit = true;
 life = 8;
+gc = instance_find(GC,0);
 </string>
           </argument>
         </arguments>
@@ -60,15 +63,24 @@ life = 8;
           <argument>
             <kind>1</kind>
             <string>//Inputs
-keyLeft = keyboard_check(vk_left);
-keyRight = keyboard_check(vk_right);
-keyJump = keyboard_check(vk_up);
-keyDuck = keyboard_check(vk_down);
+if(!gc.gameOver){
+    keyLeft = keyboard_check(vk_left);
+    keyRight = keyboard_check(vk_right);
+    keyJump = keyboard_check(vk_up);
+    keyDuck = keyboard_check(vk_down);
+}
 
 //cancelar input
-if(hit &gt; 0){
+if(hit &gt; 0.2){
     keyLeft = 0;
     keyRight = 0;
+}
+
+if(keyDuck &amp;&amp; grounded){
+    duck = true;
+}
+else{
+    duck = false;
 }
 
 //Gravedad
@@ -78,9 +90,31 @@ if (vSpeed &lt; 10)
 //Movimiento
 move = keyRight - keyLeft;
 
+
 //si no ha sido golpeado -&gt; se mueve
 if(hit == 0){
-    hSpeed = move * movSpeed;
+    if(oldDir == move){
+        if(grounded){
+            hSpeed = move * movSpeed;
+        }
+        else{
+            hSpeed = move * airMovSpeed;
+        }
+    }
+    else{
+        hSpeed = move * 0.01;
+    }
+}
+
+//Dirección
+if(move != 0 &amp;&amp; move != dir){
+    dir = move;
+    if(dir &gt; 0){
+        image_xscale = 1;
+    }
+    else{
+        image_xscale = -1;
+    }
 }
 
 //Hit -&gt; resetea el contador de golpeo
@@ -89,7 +123,7 @@ if(hit &gt; 0){
 }
 
 //Agacharse
-if(keyDuck &amp;&amp; sprite_index != sprPlayerLowKick &amp;&amp; sprite_index != sprPlayerLowPunch){
+if(duck &amp;&amp; sprite_index != sprPlayerLowKick &amp;&amp; sprite_index != sprPlayerLowPunch &amp;&amp; hit &lt; 0.2){
     sprite_index = sprPlayerDuck;
 }
 
@@ -97,7 +131,7 @@ if(keyDuck &amp;&amp; sprite_index != sprPlayerLowKick &amp;&amp; sprite_index !
 if (place_meeting(x, y + 1, objBlock))
 {
     vSpeed = keyJump * -jumpSpeed;
-    if(keyJump != 0){
+    if(keyJump != 0 &amp;&amp; hit &lt; 0.2){
         sprite_index = sprPlayerJump;
         grounded = false;
     }
@@ -128,15 +162,16 @@ if (place_meeting(x, y + vSpeed, objBlock))
 if(place_meeting(x + hSpeed, y, objEnemyBase) &amp;&amp; hit == 0){
     enemy = instance_place(x + hSpeed,y,objEnemyBase);
     if(enemy.alive){
-        hSpeed = -sign(hSpeed)*4;
+        hSpeed = -sign(hSpeed)*2;
         life -= 1;
         if(grounded){
-            vSpeed = -4;
-            hit = 0.4
+            vSpeed = -3;
+            hit = 0.5;
         }
         else{
-            hit = 0.3;
+            hit = 0.4;
         }
+        sprite_index = sprPlayerHit;
     }
     //hSpeed = 0;
 }
@@ -161,57 +196,50 @@ if(place_meeting(x + hSpeed, y, objEnemyTest) &amp;&amp; hit != 0){
 x += hSpeed;
 y += vSpeed;
 
-//Dirección
-if(move != 0 &amp;&amp; move != dir){
-    dir = move;
-    if(dir &gt; 0){
-        image_xscale = 1;
-    }
-    else{
-        image_xscale = -1;
-    }
-}
 
-if(hSpeed != 0 &amp;&amp; grounded){
+
+if(move != 0 &amp;&amp; grounded &amp;&amp; hit &lt; 0.2){
     sprite_index = sprPlayerRun;
 }
 
-if(sprite_index == sprPlayerRun &amp;&amp; hSpeed == 0){
+if(sprite_index == sprPlayerRun &amp;&amp; hSpeed == 0 &amp;&amp; hit == 0){
     sprite_index = sprPlayerTest;
 }
 
-
-//Patada
-if(keyboard_check_pressed(ord('Z'))){
-    if(keyDuck){
-        sprite_index = sprPlayerLowKick;
-        with(instance_create(x,y,objLowKickHbox)){
-            image_xscale = other.image_xscale;
+if(hit &lt; 0.2 &amp;&amp; !gc.gameOver){
+    //Patada
+    if(keyboard_check_pressed(ord('Z'))){
+        if(duck){
+            sprite_index = sprPlayerLowKick;
+            with(instance_create(x,y,objLowKickHbox)){
+                image_xscale = other.image_xscale;
+            }
+        }
+        else{
+            sprite_index = sprPlayerKick;
+            with(instance_create(x,y,objKickHbox)){
+                image_xscale = other.image_xscale;
+            }
         }
     }
-    else{
-        sprite_index = sprPlayerKick;
-        with(instance_create(x,y,objKickHbox)){
-            image_xscale = other.image_xscale;
+    
+    if(keyboard_check_pressed(ord('X'))){
+        if(duck){
+            sprite_index = sprPlayerLowPunch;
+            with(instance_create(x,y,objLowPunchHbox)){
+                image_xscale = other.image_xscale;
+            }
+        }
+        else{
+            sprite_index = sprPlayerPunch;
+            with(instance_create(x,y,objPunchHbox)){
+                image_xscale = other.image_xscale;
+            }
         }
     }
 }
 
-if(keyboard_check_pressed(ord('X'))){
-    if(keyDuck){
-        sprite_index = sprPlayerLowPunch;
-        with(instance_create(x,y,objLowPunchHbox)){
-            image_xscale = other.image_xscale;
-        }
-    }
-    else{
-        sprite_index = sprPlayerPunch;
-        with(instance_create(x,y,objPunchHbox)){
-            image_xscale = other.image_xscale;
-        }
-    }
-}
-
+oldDir = dir;
 
 
 </string>
@@ -236,8 +264,9 @@ if(keyboard_check_pressed(ord('X'))){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(sprite_index != sprPlayerTest &amp;&amp; sprite_index != sprPlayerRun &amp;&amp; sprite_index != sprPlayerJump){
-    sprite_index = sprPlayerTest;
+            <string>//if(sprite_index != sprPlayerTest &amp;&amp; sprite_index != sprPlayerRun &amp;&amp; sprite_index != sprPlayerJump &amp;&amp; sprite_index != sprPlayerHit){
+if(sprite_index == sprPlayerKick || sprite_index == sprPlayerPunch || sprite_index == sprPlayerLowKick || sprite_index == sprPlayerLowPunch){
+        sprite_index = sprPlayerTest;
 }
 </string>
           </argument>
